@@ -1,0 +1,79 @@
+# 配置端口
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 21600
+# 配置mysql数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.113.197.56:3306/blog?serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: ch966907
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    host: 127.0.0.1
+    port: 6379
+# mail配置
+  mail:
+    host: smtp.qq.com # 配置 smtp 服务器地址
+    port: 587 # smtp 服务器的端口
+    username: deilumengyu@foxmail.com # 配置邮箱用户名
+    password: xhivluvbcahgebhj # 配置申请到的授权码
+    default-encoding: UTF-8 # 配置邮件编码
+    properties:
+      mail:
+      smtp:
+      socketFactoryClass: javax.net.ssl.SSLSocketFactory # 配饰 SSL 加密工厂
+
+
+# 配置MybatisPlus
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+# 上传模式 可选 oss或local  （http://和最后的/一定不能去！！！）
+upload:
+  mode: local
+#  本地文件上传
+  local:
+    url: http://static.deilumengyu.top/upload/
+    path: /www/wwwroot/uploadFile/
+
+#    阿里云
+#  oss:
+#    url: http://Bucket域名/
+#    endpoint: OSS配置endpoint
+#    accessKeyId: OSS配置accessKeyId
+#    accessKeySecret: OSS配置accessKeySecret
+#    bucketName: OSS配置bucketName
+
+#    腾讯云
+#  cos:
+#    url: https://ftz-1307097786.cos.ap-beijing.myqcloud.com/
+#    region: ap-beijing
+#    secretId: AKIDhKqBJPN8mDWcWFm6oVBj4A2h7IF2lFUX
+#    secretKey: tBLekcFi27yb3IJ6i7GCzYt2ymLgtwmt
+#    bucketName: ftz-1307097786
+
+
+# 搜索模式 可选 elasticsearch或mysql
+search:
+  mode: mysql
+
